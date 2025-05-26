@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Header.css";
+import { Link } from 'react-router-dom';
 
 interface HeaderProps {}
 
@@ -82,18 +83,18 @@ const Header: React.FC<HeaderProps> = () => {
           </div>
 
           {/* Regular Navigation Links */}
-          <span className="nav-link" onClick={() => handleNavClick("features")}>
+          <Link to="/features" className="nav-link">
             Features
-          </span>
-          <span className="nav-link" onClick={() => handleNavClick("about-us")}>
+          </Link>
+          <Link to="/about-us" className="nav-link">
             About Us
-          </span>
-          <span className="nav-link" onClick={() => handleNavClick("forum")}>
+          </Link>
+          <Link to="/forum" className="nav-link">
             Forum
-          </span>
-          <span className="nav-link" onClick={() => handleNavClick("login")}>
+          </Link>
+          <Link to="/login" className="nav-link">
             Login
-          </span>
+          </Link>
 
           {/* Contact Us Button */}
           <button
