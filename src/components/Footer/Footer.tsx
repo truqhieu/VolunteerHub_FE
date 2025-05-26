@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
         <div className="footer__section newsletter-section">
           <div className="footer__logo">
             <img src="/logo.png" alt="Logo" className="logo-image" />
-            <span className="logo-text">VolunteerHub</span>
+            <span>VolunteerHub</span>
           </div>
           <div className="footer__newsletter">
             <h3 className="footer__heading">Join Our Newsletter</h3>

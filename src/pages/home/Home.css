@@ -1,10 +1,11 @@
 .hero-otr {
-  background: linear-gradient(135deg, #ff6b9d, #ff8fab);
+  background: #173330;
   box-shadow: 0 2px 10px rgba(255, 107, 157, 0.3);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 80px;
+  color: white;
 }
 
 .hero-otr2 {
@@ -78,7 +79,7 @@
 /* Contact Button Styles */
 .contact-btn {
   background: white;
-  color: #ff6b9d;
+  color: #173330;
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 25px;
@@ -145,4 +146,8 @@
 .volunteer-section p {
   margin: 0 auto;
   max-width: 710px;
+}
+
+.features-grid{
+  margin-left: 120px;
 }
