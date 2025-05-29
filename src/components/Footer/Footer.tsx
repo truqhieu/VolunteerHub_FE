@@ -9,48 +9,35 @@ const Footer: React.FC = () => {
         <div className="footer__section newsletter-section">
           <div className="footer__logo">
             <img src="/logo.png" alt="Logo" className="logo-image" />
-            <span>VolunteerHub</span>
+            <span>VolunteerHub Hà Tĩnh</span>
           </div>
           <div className="footer__newsletter">
-            <h3 className="footer__heading">Join Our Newsletter</h3>
-            <p className="footer__subtext">
-              Tips, resources, and events delivered monthly.
-            </p>
             <form className="footer__form">
               <input
                 type="email"
-                placeholder="Enter your email"
+                placeholder="Nhập email của bạn"
                 className="footer__input"
               />
               <button type="submit" className="footer__button">
-                Subscribe
+                Đăng ký
               </button>
             </form>
           </div>
         </div>
 
-        {/* Our Software */}
         <div className="footer__section">
-          <h3 className="footer__heading">Our Software</h3>
-          <ul className="footer__list">
-            {[
-              "Volunteer Impact",
-              "Donor Impact",
-              "Client Impact",
-              "Member Impact",
-            ].map((item) => (
-              <li key={item} className="footer__list-item">
-                <a href="#">{item}</a>
-              </li>
-            ))}
-          </ul>
+          <h3 className="footer__heading">Tham gia cùng của chúng tôi</h3>
+          <p className="footer__subtext">
+            Nền tảng gây quỹ cộng đồng trực tuyến tiện lợi, tin cậy và minh
+            bạch.
+          </p>
         </div>
 
         {/* Help Section */}
         <div className="footer__section">
-          <h3 className="footer__heading">We're Here to Help!</h3>
+          <h3 className="footer__heading">Chúng tôi luôn sẵn sàng hỗ trợ!</h3>
           <ul className="footer__list">
-            {["Support", "Accessibility", "Contact Us", "System Status"].map(
+            {["Hỗ trợ", "Truy cập", "Liên hệ", "Tình trạng hệ thống"].map(
               (item) => (
                 <li key={item} className="footer__list-item">
                   <a href="#">{item}</a>
@@ -63,11 +50,13 @@ const Footer: React.FC = () => {
 
       <div className="footer__bottom">
         <div className="footer__legal">
-          <span className="footer__copyright">© 2025 VolunteerHub Inc.</span>
+          <span className="footer__copyright">
+            © 2025 VolunteerHub Hà Tĩnh.
+          </span>
           <div className="footer__links">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Cookie Settings</a>
+            <a href="#">Chính sách bảo mật</a>
+            <a href="#">Điều khoản dịch vụ</a>
+            <a href="#">Cài đặt cookie</a>
           </div>
         </div>
       </div>

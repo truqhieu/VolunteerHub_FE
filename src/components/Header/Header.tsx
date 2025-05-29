@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Header.css";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 interface HeaderProps {}
 
@@ -26,7 +26,11 @@ const Header: React.FC<HeaderProps> = () => {
         {/* Logo Section */}
         <div className="logo">
           <img src="/logo.png" alt="Logo" className="logo-image" />
-          <span className="logo-text">VolunteerHub</span>
+          <span className="logo-text">
+            VolunteerHub
+            <br />
+            <span>Hà Tĩnh</span>
+          </span>
         </div>
 
         {/* Navigation Section */}
@@ -39,7 +43,7 @@ const Header: React.FC<HeaderProps> = () => {
               onMouseEnter={() => setIsDropdownOpen(true)}
               type="button"
             >
-              Solutions
+              Giải Pháp
               <span
                 className={`dropdown-arrow ${isDropdownOpen ? "open" : ""}`}
               >
@@ -52,31 +56,25 @@ const Header: React.FC<HeaderProps> = () => {
                   className="dropdown-item"
                   onClick={() => handleNavClick("volunteer-management")}
                 >
-                  Volunteer Management
-                </button>
-                <button
-                  className="dropdown-item"
-                  onClick={() => handleNavClick("volunteer-management")}
-                >
-                  Volunteer Management
+                  Quản Lý Tình Nguyện Viên
                 </button>
                 <button
                   className="dropdown-item"
                   onClick={() => handleNavClick("donor-management")}
                 >
-                  Donor Management
+                  Quản Lý Nhà Tài Trợ
                 </button>
                 <button
                   className="dropdown-item"
                   onClick={() => handleNavClick("campaign-management")}
                 >
-                  Campaign Management
+                  Quản Lý Chiến Dịch
                 </button>
                 <button
                   className="dropdown-item"
                   onClick={() => handleNavClick("reporting-certification")}
                 >
-                  Reporting & Certification
+                  Báo Cáo & Chứng Chỉ
                 </button>
               </div>
             )}
@@ -84,16 +82,16 @@ const Header: React.FC<HeaderProps> = () => {
 
           {/* Regular Navigation Links */}
           <Link to="/features" className="nav-link">
-            Features
+            Tính Năng
           </Link>
           <Link to="/about-us" className="nav-link">
-            About Us
+            Về Chúng Tôi
           </Link>
           <Link to="/forum" className="nav-link">
-            Forum
+            Diễn Đàn
           </Link>
           <Link to="/login" className="nav-link">
-            Login
+            Đăng Nhập
           </Link>
 
           {/* Contact Us Button */}
@@ -102,7 +100,7 @@ const Header: React.FC<HeaderProps> = () => {
             onClick={() => handleNavClick("contact")}
             type="button"
           >
-            Contact Us
+            Liên Hệ ngay
           </button>
         </nav>
       </div>
