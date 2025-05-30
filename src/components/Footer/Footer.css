@@ -64,6 +64,8 @@
   border-radius: 0.375rem;
   outline: none;
   min-width: 200px;
+  background-color: white;
+  color:black;
 }
 
 .footer__input:focus {

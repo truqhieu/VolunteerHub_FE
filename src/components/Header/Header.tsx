@@ -37,52 +37,18 @@ const Header: React.FC<HeaderProps> = () => {
         <nav className="navigation">
           {/* Solutions Dropdown */}
           <div className="nav-item dropdown" onMouseLeave={closeDropdown}>
-            <button
+            <Link to = "/"
               className="nav-link dropdown-toggle"
               onClick={toggleDropdown}
               onMouseEnter={() => setIsDropdownOpen(true)}
-              type="button"
             >
-              Giải Pháp
-              <span
-                className={`dropdown-arrow ${isDropdownOpen ? "open" : ""}`}
-              >
-                ▼
-              </span>
-            </button>
-            {isDropdownOpen && (
-              <div className="dropdown-menu">
-                <button
-                  className="dropdown-item"
-                  onClick={() => handleNavClick("volunteer-management")}
-                >
-                  Quản Lý Tình Nguyện Viên
-                </button>
-                <button
-                  className="dropdown-item"
-                  onClick={() => handleNavClick("donor-management")}
-                >
-                  Quản Lý Nhà Tài Trợ
-                </button>
-                <button
-                  className="dropdown-item"
-                  onClick={() => handleNavClick("campaign-management")}
-                >
-                  Quản Lý Chiến Dịch
-                </button>
-                <button
-                  className="dropdown-item"
-                  onClick={() => handleNavClick("reporting-certification")}
-                >
-                  Báo Cáo & Chứng Chỉ
-                </button>
-              </div>
-            )}
+              Trang Chủ
+            </Link>
           </div>
 
           {/* Regular Navigation Links */}
-          <Link to="/features" className="nav-link">
-            Tính Năng
+          <Link to="/campagin" className="nav-link">
+            Chiến Dịch
           </Link>
           <Link to="/about-us" className="nav-link">
             Về Chúng Tôi
