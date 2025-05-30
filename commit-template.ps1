@@ -26,8 +26,17 @@ function Get-CommitType {
     return "feat"
 }
 
+# Add all changes to staging area
+git add .
+
 # Get list of changed files
 $changedFiles = git diff --cached --name-only
+
+# If no changes, exit
+if (-not $changedFiles) {
+    Write-Host "No changes to commit. Make sure you have added your files with 'git add'."
+    exit
+}
 
 # Get commit type based on changed files
 $commitType = Get-CommitType
