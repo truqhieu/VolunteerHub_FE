@@ -1,28 +1,56 @@
+# Function to determine commit type based on changed files
+function Get-CommitType {
+    $changedFiles = git diff --cached --name-only
+    
+    # Check for test files
+    if ($changedFiles -match '\.test\.|\.spec\.') {
+        return "test"
+    }
+    
+    # Check for documentation
+    if ($changedFiles -match '\.md$|docs/') {
+        return "doc"
+    }
+    
+    # Check for style changes
+    if ($changedFiles -match '\.css$|\.scss$|\.less$') {
+        return "style"
+    }
+    
+    # Check for package files
+    if ($changedFiles -match 'package\.json$|yarn\.lock$|package-lock\.json$') {
+        return "chore"
+    }
+    
+    # Default to feat for new features
+    return "feat"
+}
+
 # Get list of changed files
 $changedFiles = git diff --cached --name-only
 
-# Create a summary of changes
-$fileSummary = ""
+# Get commit type based on changed files
+$commitType = Get-CommitType
+
+# Create a descriptive message based on changed files
+$fileNames = $changedFiles -join ", "
+$commitMessage = "Update $fileNames"
+
+# Create commit message with files
+$fullMessage = "$commitType`: $commitMessage`n"
 if ($changedFiles) {
-    $fileSummary = "`n`nChanged files:`n"
+    $fullMessage += "`nChanged files:`n"
     foreach ($file in $changedFiles) {
-        $fileSummary += "- $file`n"
+        $fullMessage += "- $file`n"
     }
 }
 
-# Read the template file
-$template = Get-Content .gitmessage
+# Create temporary file for commit message
+$tempFile = [System.IO.Path]::GetTempFileName()
+$fullMessage | Out-File -FilePath $tempFile -Encoding utf8
 
-# Extract the first non-comment line as the default message
-$defaultMessage = $template | Where-Object { $_ -notmatch '^#' -and $_ -notmatch '^$' } | Select-Object -First 1
+# Execute git commit
+git commit -F $tempFile
 
-# If no default message found, use a generic one
-if (-not $defaultMessage) {
-    $defaultMessage = "feat: Update code"
-}
-
-# Combine message with file summary
-$commitMessage = $defaultMessage + $fileSummary
-
-# Execute git commit with the detailed message
-git commit -m $commitMessage 
+# Clean up
+Remove-Item $tempFile 
