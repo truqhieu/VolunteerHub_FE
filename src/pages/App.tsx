@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from '../pages/home/Home';
 import Login from '../pages/login/Login';
 import Register from '../pages/register/Register';
-import AboutUs from "../pages/AbouUs/aboutus";
-import DonatePage from "../pages/AbouUs/DonatePage";
+import AboutUs from "../pages/about-us/aboutus";
+import DonatePage from "../pages/about-us/DonatePage";
 import './App.css';
 
 const App: React.FC = () => {
