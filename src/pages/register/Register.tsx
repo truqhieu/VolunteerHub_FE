@@ -13,6 +13,7 @@ const Register: React.FC = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [formErrors, setFormErrors] = useState<string[]>([]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -22,30 +23,24 @@ const Register: React.FC = () => {
   const validateForm = () => {
     const errors: string[] = [];
 
-    if (!formData.fullName.trim()) errors.push("Full Name is required");
-    if (!formData.email.trim()) errors.push("Email is required");
-    if (!formData.phone.trim()) errors.push("Phone number is required");
-    if (!formData.date_of_birth) errors.push("Date of birth is required");
-    if (!formData.password.trim()) errors.push("Password is required");
+    if (!formData.fullName.trim()) errors.push("Full Name is required.");
+    if (!formData.email.trim()) errors.push("Email is required.");
+    if (!formData.phone.trim()) errors.push("Phone number is required.");
+    if (!formData.date_of_birth) errors.push("Date of birth is required.");
+    if (!formData.password.trim()) errors.push("Password is required.");
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (formData.email && !emailRegex.test(formData.email)) {
-      errors.push("Please enter a valid email address");
+      errors.push("Please enter a valid email address.");
     }
 
-    // Phone validation (basic)
     const phoneRegex = /^\d{10,15}$/;
     if (formData.phone && !phoneRegex.test(formData.phone.replace(/\D/g, ""))) {
-      errors.push("Please enter a valid phone number");
+      errors.push("Please enter a valid phone number.");
     }
 
-    if (errors.length > 0) {
-      alert("Please fix the following errors:\n" + errors.join("\n"));
-      return false;
-    }
-
-    return true;
+    setFormErrors(errors);
+    return errors.length === 0;
   };
 
   const handleSubmit = async () => {
@@ -88,20 +83,32 @@ const Register: React.FC = () => {
   return (
     <div className="registerPage">
       <img src="/logo-remove-bg.png" alt="Logo" className="logo" />
+      {formErrors.length > 0 && (
+        <div className="errorContainer">
+          {formErrors.map((error, index) => (
+            <p key={index} className="errorText">
+              {error}
+            </p>
+          ))}
+        </div>
+      )}
       <div className="loginBox">
         <input
           type="text"
           name="fullName"
-          placeholder="Full Name"
+          placeholder="*Full Name"
           className="input"
           value={formData.fullName}
           onChange={handleChange}
           required
         />
+        <small className="inputNote">
+          Please enter your real full name. It will appear on your certificate.
+        </small>
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="*Email"
           className="input"
           value={formData.email}
           onChange={handleChange}
@@ -110,7 +117,7 @@ const Register: React.FC = () => {
         <input
           type="tel"
           name="phone"
-          placeholder="Phone Number"
+          placeholder="*Phone Number"
           className="input"
           value={formData.phone}
           onChange={handleChange}
@@ -128,7 +135,7 @@ const Register: React.FC = () => {
           <input
             type={showPassword ? "text" : "password"}
             name="password"
-            placeholder="Password"
+            placeholder="*Password"
             className="input"
             value={formData.password}
             onChange={handleChange}

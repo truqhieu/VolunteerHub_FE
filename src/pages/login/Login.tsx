@@ -101,7 +101,11 @@ const Login: React.FC = () => {
           <label htmlFor="keepLoggedIn">Keep me logged in</label>
         </div>
 
-        {error && <p className="error">{error}</p>}
+        {error && (
+          <div className="errorContainer">
+            <p className="errorText">{error}</p>
+          </div>
+        )}
 
         <button className="signInButton" onClick={handleLogin}>
           Sign in
