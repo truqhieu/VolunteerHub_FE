@@ -7,7 +7,7 @@ const HomeDetail: React.FC = () => {
         <div className="home-detail-container">
             {/* Header */}
             <Header />
-
+            
             {/* Banner */}
             <div className="banner">
                 <div className="overlay"></div>
@@ -16,31 +16,9 @@ const HomeDetail: React.FC = () => {
 
             {/* Content Section */}
             <div className="content-wrapper">
-                <div className="info-box">
-                    <h2 className="project-title">
-                        Xin giúp bé Cháng Thị Hà chữa bệnh hiểm nghèo
-                    </h2>
-
-                    <div className="project-meta">
-                        <span>👤 278 lượt ủng hộ</span>
-                        <span className="organization">Quỹ Từ tâm Đắk Lắk</span>
-                    </div>
-
-
-                    {/* Progress bar */}
-                    <div className="progress-section">
-                        <div className="progress-header">
-                            <span>Mục tiêu dự án</span>
-                            <span>30.000.000đ</span>
-                        </div>
-                        <div className="progress-bar">
-                            <div className="progress-fill" style={{ width: "50%" }}></div>
-                        </div>
-                        <div className="raised-amount">15.022.084đ</div>
-                    </div>
-
-                    {/* Image under Progress bar */}
-                    <div className="progress-image-container">
+                <div className="content-layout">
+                    {/* Cột trái - Hình ảnh */}
+                    <div className="left-column">
                         <img
                             src="https://images.pexels.com/photos/6646918/pexels-photo-6646918.jpeg?auto=compress&cs=tinysrgb&w=600"
                             alt="Hình minh họa tiến độ dự án"
@@ -48,25 +26,53 @@ const HomeDetail: React.FC = () => {
                         />
                     </div>
 
-                    {/* Donation input */}
-                    <div className="donation-section">
-                        <div className="input-wrapper">
-                            <span className="currency">VND</span>
-                            <input type="number" placeholder="Nhập số tiền" />
-                        </div>
-                        <button className="donate-btn">Ủng hộ ngay</button>
-                        <button className="ambassador-btn">Trở thành sứ giả</button>
-                    </div>
+                    {/* Cột phải - Nội dung */}
+                    <div className="right-column">
+                        <div className="info-box">
+                            <h2 className="project-title">
+                                Xin giúp bé Cháng Thị Hà chữa bệnh hiểm nghèo
+                            </h2>
 
-                    {/* Tabs */}
-                    <div className="tabs">
-                        <button className="tab active">Nội dung</button>
-                        <button className="tab disabled" disabled>
-                            Danh sách ủng hộ
-                        </button>
+                            <div className="project-meta">
+                                <span>👤 278 lượt ủng hộ</span>
+                                <span className="organization">Quỹ Từ tâm Đắk Lắk</span>
+                            </div>
+
+                            {/* Progress bar */}
+                            <div className="progress-section">
+                                <div className="progress-header">
+                                    <span>Mục tiêu dự án</span>
+                                    <span>30.000.000đ</span>
+                                </div>
+                                <div className="progress-bar">
+                                    <div className="progress-fill" style={{ width: "50%" }}></div>
+                                </div>
+                                <div className="raised-amount">15.022.084đ</div>
+                            </div>
+
+                            {/* Donation input */}
+                            <div className="donation-section">
+                                <div className="input-wrapper">
+                                    <span className="currency">VND</span>
+                                    <input type="number" placeholder="Nhập số tiền" />
+                                </div>
+                                <button className="donate-btn">Ủng hộ ngay</button>
+                                <button className="ambassador-btn">Trở thành sứ giả</button>
+                            </div>
+
+                            {/* Tabs */}
+                            <div className="tabs">
+                                <button className="tab active">Nội dung</button>
+                                <button className="tab disabled" disabled>
+                                    Danh sách ủng hộ
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+
 
             {/* Project Content Section */}
             <div className="project-content">

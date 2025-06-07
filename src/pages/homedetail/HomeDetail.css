@@ -225,3 +225,42 @@
   border-radius: 8px;
   object-fit: cover;
 }
+/* NEW: Bố cục 2 cột ảnh và nội dung */
+.content-layout {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* Cột trái - ảnh */
+.left-column {
+  flex: 1;
+  min-width: 300px;
+}
+
+.left-column .progress-image {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Cột phải - nội dung chính */
+.right-column {
+  flex: 1;
+  min-width: 320px;
+}
+
+@media (max-width: 768px) {
+  .content-layout {
+    flex-direction: column;
+  }
+
+  .left-column,
+  .right-column {
+    width: 100%;
+  }
+}
