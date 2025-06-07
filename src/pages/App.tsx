@@ -8,6 +8,8 @@ import HomeDetail from './homedetail/HomeDetail';
 
 import AboutUs from "../pages/about-us/aboutus";
 import DonatePage from "../pages/about-us/DonatePage";
+import ForgotPW from './login/ForgotPW';
+import ResetPW from './login/ResetPW';
 
 import './App.css';
 
@@ -24,7 +26,8 @@ const App: React.FC = () => {
 
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/donate" element={<DonatePage />} />
-
+          <Route path="/forgot-password" element={<ForgotPW />} />
+          <Route path="/reset-password" element={<ResetPW />} />
         </Routes>
       </div>
     </BrowserRouter>

@@ -83,7 +83,7 @@ const Login: React.FC = () => {
         </div>
 
         <div className="checkboxWrapper">
-          <a href="#" className="forgot">
+          <a href="/forgot-password" className="forgot">
             Forgot password?
           </a>
           <input

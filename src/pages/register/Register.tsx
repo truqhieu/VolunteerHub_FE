@@ -6,6 +6,7 @@ const Register: React.FC = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    confirmPassword: "",
     fullName: "",
     phone: "",
     date_of_birth: "",
@@ -28,6 +29,10 @@ const Register: React.FC = () => {
     if (!formData.phone.trim()) errors.push("Phone number is required.");
     if (!formData.date_of_birth) errors.push("Date of birth is required.");
     if (!formData.password.trim()) errors.push("Password is required.");
+    if (!formData.confirmPassword.trim())
+      errors.push("Confirm Password is required.");
+    if (formData.password !== formData.confirmPassword)
+      errors.push("Passwords do not match.");
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (formData.email && !emailRegex.test(formData.email)) {
@@ -49,7 +54,6 @@ const Register: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      // Create a clean data object matching backend expectations
       const submitData = {
         email: formData.email.trim(),
         password: formData.password,
@@ -58,17 +62,13 @@ const Register: React.FC = () => {
         date_of_birth: formData.date_of_birth,
       };
 
-      console.log("Registering with:", submitData);
-
       const response = await registerUser(submitData);
-      alert(
-        response.message || "Registration successful. Please verify email."
-      );
+      alert(response.message || "Registration successful. Please verify email.");
 
-      // Reset form on success
       setFormData({
         email: "",
         password: "",
+        confirmPassword: "",
         fullName: "",
         phone: "",
         date_of_birth: "",
@@ -96,7 +96,7 @@ const Register: React.FC = () => {
         <input
           type="text"
           name="fullName"
-          placeholder="*Full Name"
+          placeholder="Full Name"
           className="input"
           value={formData.fullName}
           onChange={handleChange}
@@ -108,7 +108,7 @@ const Register: React.FC = () => {
         <input
           type="email"
           name="email"
-          placeholder="*Email"
+          placeholder="Email"
           className="input"
           value={formData.email}
           onChange={handleChange}
@@ -117,7 +117,7 @@ const Register: React.FC = () => {
         <input
           type="tel"
           name="phone"
-          placeholder="*Phone Number"
+          placeholder="Phone Number"
           className="input"
           value={formData.phone}
           onChange={handleChange}
@@ -135,7 +135,7 @@ const Register: React.FC = () => {
           <input
             type={showPassword ? "text" : "password"}
             name="password"
-            placeholder="*Password"
+            placeholder="Password"
             className="input"
             value={formData.password}
             onChange={handleChange}
@@ -150,9 +150,27 @@ const Register: React.FC = () => {
           </span>
         </div>
 
+        <div className="passwordWrapper">
+          <input
+            type={showPassword ? "text" : "password"}
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            className="input"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            required
+          />
+          <span
+            className="showLink"
+            style={{ cursor: "pointer" }}
+            onClick={() => setShowPassword((prev) => !prev)}
+          >
+            {showPassword ? "Hide" : "Show"}
+          </span>
+        </div>
+
         <div className="checkboxWrapper">
           <input type="checkbox" id="keepLoggedIn" defaultChecked />
-          <label htmlFor="keepLoggedIn">Remember me</label>
         </div>
 
         <p className="agreement-text">
