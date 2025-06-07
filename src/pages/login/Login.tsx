@@ -1,32 +1,117 @@
-import React from 'react';
+import React, { useState } from "react";
+import { loginUser } from "../../apis/login"; // Adjust the path as needed
 import "./Login.css";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Login: React.FC = () => {
+  const [email, setEmail] = useState(
+    () => localStorage.getItem("rememberedEmail") || ""
+  );
+  const [keepLoggedIn, setKeepLoggedIn] = useState(
+    () => !!localStorage.getItem("rememberedEmail")
+  );
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  const handleLogin = async () => {
+    try {
+      setError(null);
+      const result = await loginUser({ email, password });
+
+      if (!result.user) {
+        console.error("Login succeeded but result.user is missing!");
+        return;
+      }
+
+      localStorage.setItem("user", JSON.stringify(result.user));
+      if (keepLoggedIn) {
+        localStorage.setItem("rememberedEmail", email);
+      } else {
+        localStorage.removeItem("rememberedEmail");
+      }
+
+      navigate("/");
+      window.location.reload();
+    } catch (err: any) {
+      setError(err.message);
+    }
+  };
+
   return (
     <div className="loginPage">
-      <img src="/logo-remove-bg.png" alt="Logo" className="logo" />
+      <Link to="/">
+        <img src="/logo-remove-bg.png" alt="Logo" className="logo" />
+      </Link>
+
       <div className="loginBox">
         <h2>Sign in</h2>
+
         <button className="socialButton">
           <img src="/google-icon.png" alt="Google" />
           Continue with Google
         </button>
-        <div className="divider"><span>or</span></div>
-        <input type="text" placeholder="Email or phone" className="input" />
-        <div className="passwordWrapper">
-          <input type="password" placeholder="Password" className="input" />
-          <span className="showLink">Show</span>
+
+        <div className="divider">
+          <span>or</span>
         </div>
-        <a href="#" className="forgot">Forgot password?</a>
+
+        <input
+          type="text"
+          placeholder="Email or phone"
+          className="input"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <div className="passwordWrapper">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            className="input"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <span
+            className="showLink"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? "Hide" : "Show"}
+          </span>
+        </div>
+
         <div className="checkboxWrapper">
-          <input type="checkbox" id="keepLoggedIn" />
+          <a href="#" className="forgot">
+            Forgot password?
+          </a>
+          <input
+            type="checkbox"
+            id="keepLoggedIn"
+            checked={keepLoggedIn}
+            onChange={(e) => {
+              const checked = e.target.checked;
+              setKeepLoggedIn(checked);
+              if (!checked) {
+                localStorage.removeItem("rememberedEmail");
+              }
+            }}
+          />
           <label htmlFor="keepLoggedIn">Keep me logged in</label>
         </div>
-        <button className="signInButton">Sign in</button>
+
+        {error && <p className="error">{error}</p>}
+
+        <button className="signInButton" onClick={handleLogin}>
+          Sign in
+        </button>
+
         <p className="joinNow">
           New to VolunteerHub Ha Tinh? <a href="/register">Register now</a>
         </p>
       </div>
+
       <footer className="footer">
         <span>VolunteerHub Ha Tinh © 2025</span>
         <a href="#">User Agreement</a>
