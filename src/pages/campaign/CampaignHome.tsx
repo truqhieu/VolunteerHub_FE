@@ -62,7 +62,7 @@ const CampaignList: React.FC = () => {
 
             <h2 className="section-title">Các dự án đang gây quỹ</h2>
             <p className="section-description">
-                Hãy lựa chọn dự án trong lĩnh vực mà bạn quan tâm nhất
+                Hãy lựa chọn dự án trong lĩnh vực mà bạn đang quan tâm nhất
             </p>
 
             <div className="campaign-grid">
