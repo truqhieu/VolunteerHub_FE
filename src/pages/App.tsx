@@ -1,16 +1,4 @@
 
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from '../pages/home/Home';
-import Login from '../pages/login/Login';
-import Register from '../pages/register/Register';
-import HomeDetail from './homedetail/HomeDetail';
-import AboutUs from "../pages/about-us/aboutus";
-import DonatePage from "../pages/about-us/DonatePage";
-import CampaignHome from '../pages/campaign/CampaignHome';
-
-import './App.css';
-
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../pages/home/Home";
@@ -22,6 +10,7 @@ import DonatePage from "../pages/about-us/DonatePage";
 import ForgotPW from "./login/ForgotPW";
 import ResetPW from "./login/ResetPW";
 import Profile from "./profile/Profile";
+import CampaignHome from '../pages/campaign/CampaignHome';
 import "./App.css";
 
 
