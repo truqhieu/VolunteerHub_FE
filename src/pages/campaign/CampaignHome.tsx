@@ -53,6 +53,13 @@ const CampaignList: React.FC = () => {
                 <span className="banner-text">Dự án</span>
             </div>
 
+            <div className="campaign-tab-header">
+                <div className="campaign-tab active">Dự án đang gây quỹ</div>
+                <div className="campaign-tab">Dự án đã kết thúc</div>
+            </div>
+
+
+
             <h2 className="section-title">Các dự án đang gây quỹ</h2>
             <p className="section-description">
                 Hãy lựa chọn dự án trong lĩnh vực mà bạn quan tâm nhất
@@ -87,7 +94,7 @@ const CampaignList: React.FC = () => {
                     );
                 })}
             </div>
-             <Footer />
+            <Footer />
         </div>
     );
 };
