@@ -92,8 +92,8 @@ const Header: React.FC = () => {
           <Link to="/about-us" className="nav-link">
             Về Chúng Tôi
           </Link>
-          <Link to="/forum" className="nav-link">
-            Diễn Đàn
+          <Link to="/news" className="nav-link">
+            Cộng đồng
           </Link>
 
           {user ? (
