@@ -140,6 +140,24 @@ const Home: React.FC = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    const script1 = document.createElement("script");
+    script1.src = "https://cdn.botpress.cloud/webchat/v3.0/inject.js";
+    script1.async = true;
+    document.body.appendChild(script1);
+
+    const script2 = document.createElement("script");
+    script2.src =
+      "https://files.bpcontent.cloud/2025/06/07/10/20250607105114-WF0SQLDV.js";
+    script2.async = true;
+    document.body.appendChild(script2);
+
+    return () => {
+      document.body.removeChild(script1);
+      document.body.removeChild(script2);
+    };
+  }, []);
+
   const nextSlide = () => {
     setCurrentSlide((prev) => {
       const maxSlide = campaignData.length - slidesPerView;
@@ -242,6 +260,7 @@ const Home: React.FC = () => {
         </div>
 
         {/* Campaign Slideshow */}
+        <h2 className="campaign-type-1">Chiến dịch đang gây quỹ</h2>
         <div className="campaign-slideshow">
           <div className="slideshow-container">
             <button className="nav-button nav-prev" onClick={prevSlide}>
@@ -313,35 +332,6 @@ const Home: React.FC = () => {
                         </div>
                         <p className="percentage">{campaign.percentage}%</p>
                       </div>
-
-                      <div className="volunteer-stats">
-                        <div className="progress-container">
-                          <div className="progress-bar">
-                            <div
-                              className="progress-fill"
-                              style={{
-                                width: `${campaign.percentage1}%`,
-                                backgroundColor: getBadgeColor(campaign.badge),
-                              }}
-                            />
-                          </div>
-                        </div>
-
-                        <div className="campaign-stats">
-                          <div className="stats-left">
-                            <p
-                              className="raised-amount"
-                              style={{ color: getBadgeColor(campaign.badge) }}
-                            >
-                              {campaign.raised1} tình nguyện viên đã tham gia
-                            </p>
-                            <p className="target-amount">
-                              với mục tiêu {campaign.target1} tình nguyện viên
-                            </p>
-                          </div>
-                          <p className="percentage">{campaign.percentage1}%</p>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 ))}
@@ -351,6 +341,98 @@ const Home: React.FC = () => {
             <button className="nav-button nav-next" onClick={nextSlide}>
               <ArrowForwardIosIcon />
             </button>
+          </div>
+
+          <h2 className="campaign-type-2">Chiến dịch chung tay hành động</h2>
+          <div className="campaign-slideshow">
+            <div className="slideshow-container">
+              <button className="nav-button nav-prev" onClick={prevSlide}>
+                <ArrowBackIosIcon />
+              </button>
+
+              <div className="slideshow-wrapper">
+                <div
+                  className="slides-container"
+                  style={{
+                    transform: `translateX(-${
+                      currentSlide * (100 / slidesPerView)
+                    }%)`,
+                  }}
+                >
+                  {[...campaignData].reverse().map((campaign) => (
+                    <div
+                      key={campaign.id}
+                      className="campaign-card"
+                      style={{
+                        minWidth: `calc(${100 / slidesPerView}% - 16px)`,
+                      }}
+                    >
+                      <div className="card-image-container">
+                        <div
+                          className="card-image"
+                          style={{ backgroundImage: `url(${campaign.image})` }}
+                        />
+                        <div
+                          className={`campaign-badge badge-${campaign.badge
+                            .toLowerCase()
+                            .replace(/\s+/g, "-")}`}
+                          style={{
+                            backgroundColor: getBadgeColor(campaign.badge),
+                          }}
+                        >
+                          {campaign.badge}
+                        </div>
+                      </div>
+
+                      <div className="card-content">
+                        <p className="campaign-organization">
+                          {campaign.organization}
+                        </p>
+
+                        <h3 className="campaign-title">{campaign.title}</h3>
+
+                        <div className="volunteer-stats">
+                          <div className="progress-container">
+                            <div className="progress-bar">
+                              <div
+                                className="progress-fill"
+                                style={{
+                                  width: `${campaign.percentage1}%`,
+                                  backgroundColor: getBadgeColor(
+                                    campaign.badge
+                                  ),
+                                }}
+                              />
+                            </div>
+                          </div>
+
+                          <div className="campaign-stats">
+                            <div className="stats-left">
+                              <p
+                                className="raised-amount"
+                                style={{ color: getBadgeColor(campaign.badge) }}
+                              >
+                                {campaign.raised1} tình nguyện viên đã tham gia
+                              </p>
+                              <p className="target-amount">
+                                với mục tiêu {campaign.target1} tình nguyện viên
+                              </p>
+                            </div>
+                            <p className="percentage">
+                              {campaign.percentage1}%
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <button className="nav-button nav-next" onClick={nextSlide}>
+                <ArrowForwardIosIcon />
+              </button>
+            </div>
           </div>
 
           <div className="view-all-container">

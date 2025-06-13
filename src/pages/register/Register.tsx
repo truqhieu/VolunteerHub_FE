@@ -6,6 +6,7 @@ const Register: React.FC = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    confirmPassword: "",
     fullName: "",
     phone: "",
     date_of_birth: "",
@@ -13,6 +14,7 @@ const Register: React.FC = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [formErrors, setFormErrors] = useState<string[]>([]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -22,30 +24,28 @@ const Register: React.FC = () => {
   const validateForm = () => {
     const errors: string[] = [];
 
-    if (!formData.fullName.trim()) errors.push("Full Name is required");
-    if (!formData.email.trim()) errors.push("Email is required");
-    if (!formData.phone.trim()) errors.push("Phone number is required");
-    if (!formData.date_of_birth) errors.push("Date of birth is required");
-    if (!formData.password.trim()) errors.push("Password is required");
+    if (!formData.fullName.trim()) errors.push("Full Name is required.");
+    if (!formData.email.trim()) errors.push("Email is required.");
+    if (!formData.phone.trim()) errors.push("Phone number is required.");
+    if (!formData.date_of_birth) errors.push("Date of birth is required.");
+    if (!formData.password.trim()) errors.push("Password is required.");
+    if (!formData.confirmPassword.trim())
+      errors.push("Confirm Password is required.");
+    if (formData.password !== formData.confirmPassword)
+      errors.push("Passwords do not match.");
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (formData.email && !emailRegex.test(formData.email)) {
-      errors.push("Please enter a valid email address");
+      errors.push("Please enter a valid email address.");
     }
 
-    // Phone validation (basic)
     const phoneRegex = /^\d{10,15}$/;
     if (formData.phone && !phoneRegex.test(formData.phone.replace(/\D/g, ""))) {
-      errors.push("Please enter a valid phone number");
+      errors.push("Please enter a valid phone number.");
     }
 
-    if (errors.length > 0) {
-      alert("Please fix the following errors:\n" + errors.join("\n"));
-      return false;
-    }
-
-    return true;
+    setFormErrors(errors);
+    return errors.length === 0;
   };
 
   const handleSubmit = async () => {
@@ -54,7 +54,6 @@ const Register: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      // Create a clean data object matching backend expectations
       const submitData = {
         email: formData.email.trim(),
         password: formData.password,
@@ -63,17 +62,13 @@ const Register: React.FC = () => {
         date_of_birth: formData.date_of_birth,
       };
 
-      console.log("Registering with:", submitData);
-
       const response = await registerUser(submitData);
-      alert(
-        response.message || "Registration successful. Please verify email."
-      );
+      alert(response.message || "Registration successful. Please verify email.");
 
-      // Reset form on success
       setFormData({
         email: "",
         password: "",
+        confirmPassword: "",
         fullName: "",
         phone: "",
         date_of_birth: "",
@@ -88,6 +83,15 @@ const Register: React.FC = () => {
   return (
     <div className="registerPage">
       <img src="/logo-remove-bg.png" alt="Logo" className="logo" />
+      {formErrors.length > 0 && (
+        <div className="errorContainer">
+          {formErrors.map((error, index) => (
+            <p key={index} className="errorText">
+              {error}
+            </p>
+          ))}
+        </div>
+      )}
       <div className="loginBox">
         <input
           type="text"
@@ -98,6 +102,9 @@ const Register: React.FC = () => {
           onChange={handleChange}
           required
         />
+        <small className="inputNote">
+          Please enter your real full name. It will appear on your certificate.
+        </small>
         <input
           type="email"
           name="email"
@@ -143,9 +150,27 @@ const Register: React.FC = () => {
           </span>
         </div>
 
+        <div className="passwordWrapper">
+          <input
+            type={showPassword ? "text" : "password"}
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            className="input"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            required
+          />
+          <span
+            className="showLink"
+            style={{ cursor: "pointer" }}
+            onClick={() => setShowPassword((prev) => !prev)}
+          >
+            {showPassword ? "Hide" : "Show"}
+          </span>
+        </div>
+
         <div className="checkboxWrapper">
           <input type="checkbox" id="keepLoggedIn" defaultChecked />
-          <label htmlFor="keepLoggedIn">Remember me</label>
         </div>
 
         <p className="agreement-text">

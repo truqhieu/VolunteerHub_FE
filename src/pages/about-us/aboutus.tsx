@@ -44,11 +44,11 @@ const AboutUs: React.FC = () => {
           <h2 className="partnersTitle">Đối tác VolunteerHub</h2>
           <h3 className="partnersSubtitle">Các tổ chức gây quỹ tiêu biểu</h3>
           <div className="partnersGrid">
-            <img src="/public/brand1.png" alt="Partner 1" />
-            <img src="/public/brand2.png" alt="Partner 2" />
-            <img src="/public/brand3.png" alt="Partner 3" />
-            <img src="/public/brand4.png" alt="Partner 4" />
-            <img src="/public/brand5.png" alt="Partner 5" />
+            <img src="/brand1.png" alt="Partner 1" />
+            <img src="/brand2.png" alt="Partner 2" />
+            <img src="/brand3.png" alt="Partner 3" />
+            <img src="/brand4.png" alt="Partner 4" />
+            <img src="/brand5.png" alt="Partner 5" />
           </div>
         </div>
       </section>

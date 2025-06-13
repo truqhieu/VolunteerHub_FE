@@ -4,7 +4,7 @@ import "./Header.css";
 
 interface User {
   fullName: string;
-  avatar?: string;
+  avatarUrl?: string;
 }
 
 const Header: React.FC = () => {
@@ -99,7 +99,7 @@ const Header: React.FC = () => {
           {user ? (
             <div className="nav-user" ref={dropdownRef}>
               <img
-                src={user.avatar || "user-default.png"}
+                src={user.avatarUrl || "user-default.png"}
                 alt="User"
                 className="logo-image"
                 onClick={toggleDropdown}
